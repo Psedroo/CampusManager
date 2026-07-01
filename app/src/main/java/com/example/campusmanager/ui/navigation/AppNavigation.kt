@@ -11,13 +11,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.campusmanager.data.remote.SupabaseClient
 import com.example.campusmanager.ui.screens.AdminHomeScreen
-import com.example.campusmanager.ui.screens.CategoriesScreen
 import com.example.campusmanager.ui.screens.CreateRequestScreen
+import com.example.campusmanager.ui.screens.HistoryScreen
 import com.example.campusmanager.ui.screens.LoginScreen
 import com.example.campusmanager.ui.screens.MyRequestsScreen
 import com.example.campusmanager.ui.screens.ProfileScreen
 import com.example.campusmanager.ui.screens.RegisterScreen
-import com.example.campusmanager.ui.screens.RequestsByStatusScreen
 import com.example.campusmanager.ui.screens.UserHomeScreen
 import io.github.jan.supabase.auth.auth
 import kotlinx.coroutines.launch
@@ -32,6 +31,7 @@ object Routes {
     const val CATEGORIES = "categories"
     const val REQUESTS_BY_STATUS = "requests_by_status"
     const val PROFILE = "profile"
+    const val HISTORY = "history"
 }
 
 @Composable
@@ -96,6 +96,9 @@ fun AppNavigation() {
                 onMyRequestsClick = {
                     navController.navigate(Routes.MY_REQUESTS)
                 },
+                onHistoryClick = {
+                    navController.navigate(Routes.HISTORY)
+                },
                 onLogoutClick = {
                     terminarSessao()
                 }
@@ -122,14 +125,6 @@ fun AppNavigation() {
 
         composable(Routes.CREATE_REQUEST) {
             CreateRequestScreen(
-                onBackClick = {
-                    navController.popBackStack()
-                }
-            )
-        }
-
-        composable(Routes.MY_REQUESTS) {
-            MyRequestsScreen(
                 nomeUtilizador = nomeUtilizador,
                 onPerfilClick = {
                     navController.navigate(Routes.PROFILE)
@@ -143,27 +138,40 @@ fun AppNavigation() {
             )
         }
 
-        composable(Routes.CATEGORIES) {
-            CategoriesScreen(
+        composable(Routes.MY_REQUESTS) {
+            MyRequestsScreen(
+                nomeUtilizador = nomeUtilizador,
+                onPerfilClick = {
+                    navController.navigate(Routes.PROFILE)
+                },
                 onBackClick = {
                     navController.popBackStack()
+                }, onLogoutClick = {
+                    terminarSessao()
                 }
             )
         }
 
-        composable(Routes.REQUESTS_BY_STATUS) {
-            RequestsByStatusScreen(
-                onBackClick = {
-                    navController.popBackStack()
-                }
-            )
-        }
 
         composable(Routes.PROFILE) {
             ProfileScreen(
                 nomeUtilizador = nomeUtilizador,
                 onBackClick = {
                     navController.popBackStack()
+                }
+            )
+        }
+        composable(Routes.HISTORY) {
+            HistoryScreen(
+                nomeUtilizador = nomeUtilizador,
+                onPerfilClick = {
+                    navController.navigate(Routes.PROFILE)
+                },
+                onBackClick = {
+                    navController.popBackStack()
+                },
+                onLogoutClick = {
+                    terminarSessao()
                 }
             )
         }

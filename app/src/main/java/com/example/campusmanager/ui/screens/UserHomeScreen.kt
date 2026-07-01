@@ -41,6 +41,7 @@ fun UserHomeScreen(
     onPerfilClick: () -> Unit,
     onCreateRequestClick: () -> Unit,
     onMyRequestsClick: () -> Unit,
+    onHistoryClick: () -> Unit,
     onLogoutClick: () -> Unit
 ) {
     Column(
@@ -108,7 +109,7 @@ fun UserHomeScreen(
 
             DashboardButton(
                 text = "Histórico",
-                onClick = onMyRequestsClick
+                onClick = onHistoryClick
             )
         }
     }

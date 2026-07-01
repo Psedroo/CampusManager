@@ -56,12 +56,6 @@ fun LoginScreen(
             .background(Color.White)
             .padding(horizontal = 32.dp, vertical = 40.dp)
     ) {
-        Text(
-            text = "🌐",
-            fontSize = 22.sp,
-            modifier = Modifier.align(Alignment.TopEnd)
-        )
-
         Column(
             modifier = Modifier
                 .fillMaxWidth()
